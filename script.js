@@ -315,7 +315,8 @@
         var url = 'https://wa.me/77003091494?text=' + encodeURIComponent(text);
         form.querySelector('.fm-done').hidden = false;
         window.open(url, '_blank', 'noopener');
-        /* сюда Opus повесит gtag-конверсию отправки формы */
+        /* Google Ads: конверсия «Отправка формы для потенциальных клиентов» */
+        if (typeof gtag_report_lead_form === 'function') { gtag_report_lead_form(); }
       });
     }
 
@@ -329,11 +330,21 @@
       }, { rootMargin: '0px 0px -25% 0px' }).observe(contacts);
     }
 
-    /* делегированные клики tel / WhatsApp — под gtag-конверсии */
+    /* делегированные клики tel / WhatsApp -> конверсии Google Ads.
+       Событие шлём без preventDefault: tel: не выгружает страницу,
+       а wa.me открывается в новой вкладке - переход не теряется. */
     document.addEventListener('click', function (e) {
       var a = e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
-      if (!a) return;
-      /* сюда Opus повесит gtag('event', ...) для звонков и WhatsApp */
+      if (!a || typeof gtag !== 'function') return;
+      if (a.getAttribute('href').indexOf('tel:') === 0) {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18416979660/EW8zCO2Ml-ocEMyd881E',
+          'value': 1.0,
+          'currency': 'USD'
+        });
+      } else if (typeof gtag_report_contact === 'function') {
+        gtag_report_contact();
+      }
     });
   });
 })();
