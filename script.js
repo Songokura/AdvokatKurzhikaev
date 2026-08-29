@@ -237,7 +237,13 @@
     captureRu();
     var saved = 'ru';
     try { saved = localStorage.getItem('lang') || 'ru'; } catch (e) {}
-    if (saved === 'kk') applyLang('kk');
+    /* ?lang=ru | ?lang=kk в URL важнее сохранённого выбора: рекламные объявления
+       на русском обязаны открывать русскую версию, даже если посетитель раньше
+       переключал сайт на казахский (иначе Google Ads - «Неподдерживаемый язык»). */
+    var forced = (location.search.match(/[?&]lang=(ru|kk)/) || [])[1];
+    var lang = forced || saved;
+    if (lang === 'kk') applyLang('kk');
+    else if (forced === 'ru') applyLang('ru');
 
     document.querySelectorAll('.lang button').forEach(function (b) {
       b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
