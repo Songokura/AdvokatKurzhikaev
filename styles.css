@@ -475,6 +475,19 @@ a.k-row:hover b{color:var(--brass-2)}
 .fab-tel{background:var(--panel-2);border:1px solid var(--brass)}
 .fab-tel svg{fill:var(--brass-2)}
 
+/* мобильный: кнопки крупнее и по бокам экрана - звонок слева, WhatsApp справа */
+@media (max-width:700px){
+  .fab{left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));flex-direction:row;justify-content:space-between;
+    padding:0 16px;pointer-events:none}
+  .fab.is-hidden{pointer-events:none}
+  .fab-btn{pointer-events:auto}
+  .fab-tel{order:-1;width:66px;height:66px}
+  .fab-tel svg{width:32px;height:32px}
+  .fab-wa{width:70px;height:70px}
+  .fab-wa svg{width:40px;height:40px}
+}
+.fab.is-hidden .fab-btn{pointer-events:none}
+
 /* ================= АДАПТИВ ================= */
 @media (max-width:1180px){
 }
