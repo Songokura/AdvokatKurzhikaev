@@ -339,6 +339,7 @@ body.no-anim .ld,body.no-anim .rv{opacity:1 !important;transform:none !important
   padding:24px 22px;box-shadow:none;border-radius:16px;
 }
 .folder-cta::before{display:none}
+@media (min-width:1025px){.folder-cta{grid-column:span 2}}
 .folder-cta p{font-size:15.5px;color:#D3CFC6}
 .folder-cta .btn{align-self:flex-start}
 .d-note{margin-top:22px;font-size:13px;color:var(--mut)}
