@@ -489,31 +489,32 @@ a.k-row:hover b{color:var(--brass-2)}
 /* в блоке контактов кнопки прячем — там свои крупные CTA, и они перекрывали форму */
 .fab.is-hidden{opacity:0;transform:translateY(14px) scale(.9);pointer-events:none}
 .fab-btn{
-  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  width:62px;height:62px;border-radius:50%;display:grid;place-items:center;
   box-shadow:0 10px 26px rgba(0,0,0,.4);transition:transform .3s;
 }
 .fab-btn:hover{transform:translateY(-3px) scale(1.05)}
 .fab-btn svg{width:26px;height:26px;fill:#fff}
-.fab-wa{width:62px;height:62px;background:#25D366;color:#fff;box-shadow:0 10px 26px rgba(37,211,102,.42),0 0 0 4px rgba(37,211,102,.18)}
+.fab-wa{background:#25D366;color:#fff;box-shadow:0 10px 26px rgba(37,211,102,.42),0 0 0 4px rgba(37,211,102,.18)}
 .fab-wa svg{width:34px;height:34px}
-.fab-tel{background:var(--panel-2);border:1px solid var(--brass)}
-.fab-ig{background:radial-gradient(circle at 30% 107%,#FDF497 0%,#FD5949 45%,#D6249F 60%,#285AEB 90%);color:#fff;box-shadow:0 10px 26px rgba(214,36,159,.38)}
-.fab-ig svg{width:28px;height:28px;fill:none}
-.fab-tel svg{fill:var(--brass-2)}
+.fab-tel{background:var(--panel-2);border:1px solid var(--brass);box-shadow:0 10px 26px rgba(0,0,0,.4),0 0 0 4px rgba(198,161,91,.14)}
+.fab-ig{background:radial-gradient(circle at 30% 107%,#FDF497 0%,#FD5949 45%,#D6249F 60%,#285AEB 90%);color:#fff;box-shadow:0 10px 26px rgba(214,36,159,.38),0 0 0 4px rgba(214,36,159,.18)}
+.fab-ig svg{width:31px;height:31px;fill:none}
+.fab-tel svg{width:29px;height:29px;fill:var(--brass-2)}
 
+/* все три кнопки одного размера, у каждой ореол 4px в своём цвете */
 /* мобильный: кнопки крупнее и по бокам экрана - звонок слева, WhatsApp справа */
 @media (max-width:700px){
   .fab{left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));flex-direction:row;justify-content:space-between;
     padding:0 16px;pointer-events:none}
   .fab.is-hidden{pointer-events:none}
   .fab-btn{pointer-events:auto}
-  .fab-tel{order:-1;width:66px;height:66px}
-  .fab-tel svg{width:32px;height:32px}
+  .fab-tel{order:-1;width:70px;height:70px}
+  .fab-tel svg{width:33px;height:33px}
   .fab-wa{width:70px;height:70px}
   .fab-wa svg{width:40px;height:40px}
   /* Instagram - над WhatsApp, по его оси */
-  .fab-ig{position:absolute;right:26px;bottom:82px;width:50px;height:50px}
-  .fab-ig svg{width:26px;height:26px}
+  .fab-ig{position:absolute;right:16px;bottom:84px;width:70px;height:70px}
+  .fab-ig svg{width:36px;height:36px}
 }
 .fab.is-hidden .fab-btn{pointer-events:none}
 
