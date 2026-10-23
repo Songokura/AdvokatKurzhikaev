@@ -4,3 +4,6 @@ _project/
 *.log
 _deploy/
 *.zip
+.impeccable/
+PRODUCT.md
+DESIGN.md
