@@ -199,17 +199,40 @@
 
   function layoutTags() {
     var g = scene.geo;
+    /* бирка справа от своего блока, по его середине: не заходит на соседние блоки;
+       не влезает в сцену по ширине - переносится в две строки */
+    var lx = g.x + g.W + 10, maxW = g.vw - lx - 6;
     REMOVE.forEach(function (r) {
       var b = scene.blocks[r.i];
       if (!b.tagText) return;
+      var full = dataText(r.tag), t = b.tagText;
+      while (t.firstChild) t.removeChild(t.firstChild);
+      t.textContent = full;
       var w = 120;
-      try { w = b.tagText.getComputedTextLength(); } catch (e) {}
-      var tw = Math.round(w + 22);
-      var tx = g.x + g.W - Math.round(tw * 0.6);
-      var ty = b.y - 14;
-      b.tagRect.setAttribute('x', tx); b.tagRect.setAttribute('y', ty); b.tagRect.setAttribute('width', tw);
-      b.tagText.setAttribute('x', tx + 11); b.tagText.setAttribute('y', ty + 16);
-      b.tag.setAttribute('transform', 'rotate(-3 ' + tx + ' ' + (ty + 12) + ')');
+      try { w = t.getComputedTextLength(); } catch (e) {}
+      var lines = [full];
+      if (w + 22 > maxW && full.indexOf(' ') > 0) {
+        var words = full.split(' '), best = 1, bestD = 1e9;
+        for (var k = 1; k < words.length; k++) {
+          var d = Math.abs(words.slice(0, k).join(' ').length - words.slice(k).join(' ').length);
+          if (d < bestD) { bestD = d; best = k; }
+        }
+        lines = [words.slice(0, best).join(' '), words.slice(best).join(' ')];
+      }
+      t.textContent = '';
+      var lw = 0;
+      lines.forEach(function (ln, n) {
+        var ts = mk('tspan', { x: lx + 11, dy: n ? 15 : 0 }, t);
+        ts.textContent = ln;
+        try { lw = Math.max(lw, ts.getComputedTextLength()); } catch (e) { lw = Math.max(lw, ln.length * 6.5); }
+      });
+      var th = lines.length > 1 ? 40 : 24;
+      var tw = Math.round(Math.min(lw + 22, Math.max(maxW, lw + 22)));
+      var ty = Math.round(b.y + (g.H - th) / 2);
+      b.tagRect.setAttribute('x', lx); b.tagRect.setAttribute('y', ty);
+      b.tagRect.setAttribute('width', tw); b.tagRect.setAttribute('height', th);
+      t.setAttribute('x', lx + 11); t.setAttribute('y', ty + 16);
+      b.tag.setAttribute('transform', 'rotate(-2 ' + lx + ' ' + (ty + th / 2) + ')');
     });
   }
 
