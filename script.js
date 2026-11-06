@@ -547,6 +547,18 @@
     initForm();
     initLightbox();
 
+    /* клики tel / WhatsApp (контакты, подвал, экран «спасибо») -> конверсии Google Ads;
+       без preventDefault: tel: не выгружает страницу, wa.me открывается в новой вкладке */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+      if (!a || typeof gtag !== 'function') return;
+      if (a.getAttribute('href').indexOf('tel:') === 0) {
+        gtag('event', 'conversion', { 'send_to': 'AW-18416979660/EW8zCO2Ml-ocEMyd881E', 'value': 1.0, 'currency': 'USD' });
+      } else if (typeof gtag_report_contact === 'function') {
+        gtag_report_contact();
+      }
+    });
+
     /* переход по ссылке с якорем - после загрузки довести до цели с учётом шапки */
     if (location.hash) {
       var t = document.getElementById(location.hash.slice(1));
