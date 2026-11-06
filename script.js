@@ -553,7 +553,7 @@
       var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
       if (!a || typeof gtag !== 'function') return;
       if (a.getAttribute('href').indexOf('tel:') === 0) {
-        gtag('event', 'conversion', { 'send_to': 'AW-18416979660/EW8zCO2Ml-ocEMyd881E', 'value': 1.0, 'currency': 'USD' });
+        gtag('event', 'conversion', { 'send_to': 'AW-18559690462/R_Y0CPqusbMdEN7N-ZFF', 'value': 1.0, 'currency': 'USD' });
       } else if (typeof gtag_report_contact === 'function') {
         gtag_report_contact();
       }
