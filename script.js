@@ -201,10 +201,13 @@
     var g = scene.geo;
     /* бирка справа от своего блока, по его середине: не заходит на соседние блоки;
        не влезает в сцену по ширине - переносится в две строки */
-    var lx = g.x + g.W + 10, maxW = g.vw - lx - 6;
     REMOVE.forEach(function (r) {
       var b = scene.blocks[r.i];
       if (!b.tagText) return;
+      /* бирка цепляется за правый край своего блока: заходит на него, но не на подпись */
+      var te = g.x + 18 + 150;
+      try { te = g.x + 18 + b.text.getComputedTextLength(); } catch (e) {}
+      var lx = Math.round(Math.max(g.x + g.W - 30, te + 10)), maxW = g.vw - lx - 6;
       var full = dataText(r.tag), t = b.tagText;
       while (t.firstChild) t.removeChild(t.firstChild);
       t.textContent = full;
