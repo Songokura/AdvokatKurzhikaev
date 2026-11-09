@@ -342,7 +342,17 @@ body.menu-open .burger span+span{transform:rotate(-45deg)}
 .ft-row p{margin:0}
 
 /* Липкая панель (мобильный) */
-.sticky{display:none}
+.ig-sec{margin-top:22px;width:fit-content}
+.lead-side .ig-sec{margin-top:0}
+/* быстрые кнопки: на десктопе - колонка справа внизу, всегда на экране */
+.sticky{position:fixed;right:24px;bottom:24px;z-index:45;display:flex;flex-direction:column;gap:12px}
+.sticky .btn{display:none}
+.sticky-tel,.sticky-wa,.sticky-ig{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;transition:transform var(--fast) var(--ease),box-shadow var(--fast) var(--ease)}
+.sticky-tel{background:var(--blue);color:#fff;box-shadow:0 0 0 4px rgba(21,48,106,.14),0 10px 24px -10px rgba(21,48,106,.7)}
+.sticky-wa{background:#25D366;color:#fff;box-shadow:0 0 0 4px rgba(37,211,102,.18),0 10px 24px -10px rgba(18,140,70,.7)}
+.sticky-ig{background:#fff;border:1px solid var(--line);box-shadow:0 0 0 4px rgba(214,41,118,.12),0 10px 24px -12px rgba(15,29,54,.45)}
+.sticky-tel:active,.sticky-wa:active,.sticky-ig:active{transform:scale(.95)}
+@media (hover:hover){.sticky-tel:hover,.sticky-wa:hover,.sticky-ig:hover{transform:translateY(-2px)}}
 
 /* ---------- Появление ---------- */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -424,9 +434,12 @@ body.menu-open .burger span+span{transform:rotate(-45deg)}
   .contacts-bg::after{background:linear-gradient(180deg,rgba(243,245,248,.95),rgba(243,245,248,.8))}
   .sec{padding:56px 0}
   .plate{padding:56px 0}
-  .sticky{display:grid;grid-template-columns:1fr 56px;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:rgba(243,245,248,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
-  .sticky .btn{min-height:52px}
-  .sticky-ig{height:52px;border-radius:10px;background:#fff;border:1px solid var(--line);display:grid;place-items:center}
+  .sticky{display:grid;grid-template-columns:minmax(0,1fr) 52px 52px 52px;gap:6px;right:0;left:0;bottom:0;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:rgba(243,245,248,.96);border-top:1px solid var(--line)}
+  .sticky .btn{display:inline-flex;min-height:52px;padding:0 10px;font-size:15px;min-width:0}
+  .sticky .btn span{overflow:hidden;text-overflow:ellipsis}
+  .sticky-tel,.sticky-wa,.sticky-ig{width:52px;height:52px;border-radius:10px;box-shadow:none}
+  .sticky-ig{border:1px solid var(--line)}
+  .ig-sec{width:auto}
   body{padding-bottom:76px}
   .footer{padding-bottom:calc(40px + 76px + env(safe-area-inset-bottom))}
   .sec-alert::after,.sec-about::after,.sec-terms::after,.sec-lead::after{width:160px;height:190px;top:16px;right:-30px}
@@ -434,6 +447,9 @@ body.menu-open .burger span+span{transform:rotate(-45deg)}
 @media (max-width:400px){
   .lang button{padding:5px 8px}
   .burger{width:40px;height:40px}
+  .sticky{grid-template-columns:minmax(0,1fr) 48px 48px 48px}
+  .sticky .btn{padding:0 8px}
+  .sticky-tel,.sticky-wa,.sticky-ig{width:48px}
 }
 @media (prefers-reduced-motion:reduce){
   .rv,.plate .plate-in{opacity:1;transform:none;transition:none}
