@@ -64,14 +64,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/photos/hero-cut-29.webp" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=20261124-1">
+<link rel="stylesheet" href="styles.css?v=20261125-1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Attorney",
   "name": "Адвокат Куржикаев Руслан Муратович",
   "description": "Защита по уголовным делам в Астане: общеуголовные, экономические, коррупционные дела, дела о наркотиках. Отдельные гражданские дела.",
-  "telephone": "+77003091494",
   "url": "https://kurzhikaev.kz/",
   "image": "https://kurzhikaev.kz/assets/og-image.jpg",
   "address": {
@@ -593,7 +592,7 @@
 
         <div class="lead-done" id="leadDone" hidden>
           <h3 data-i18n="done_h">Сообщение готово - WhatsApp открывается</h3>
-          <p data-i18n="done_x">Если окно не появилось, напишите напрямую: +7 700 309 14 94. По уголовным делам отвечаю круглосуточно.</p>
+          <p data-i18n="done_x_v2">Если окно не появилось, нажмите кнопку ниже. По уголовным делам отвечаю круглосуточно.</p>
           <a class="btn btn-primary" id="doneWa" href="https://wa.me/77003091494" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-wa"/></svg><span data-i18n="done_btn">Открыть WhatsApp ещё раз</span></a>
         </div>
       </div>
@@ -621,10 +620,8 @@
     <div class="contacts-card rv">
       <p class="kick"><span data-i18n="k_kick">Контакты</span></p>
       <h2 class="h2" data-i18n="k_h2">Контакты</h2>
-      <p class="lead" data-i18n="k_lead">По уголовным делам звонки принимаю круглосуточно.</p>
+      <p class="lead" data-i18n="k_lead_v2">Связь - через заявку на сайте. По уголовным делам отвечаю круглосуточно.</p>
       <dl class="k-list">
-        <div><dt data-i18n="k_phone">Телефон</dt><dd><a href="tel:+77003091494">+7 700 309 14 94</a></dd></div>
-        <div><dt>WhatsApp</dt><dd><a href="https://wa.me/77003091494" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-wa"/></svg>+7 700 309 14 94</a></dd></div>
         <div><dt data-i18n="k_addr">Адрес</dt><dd data-i18n="k_addr_v">г. Астана, ул. Туркестан 16</dd></div>
         <div><dt data-i18n="k_hours">Режим работы</dt><dd data-i18n="k_hours_v">09:00-20:00, по уголовным делам - круглосуточно</dd></div>
       </dl>
@@ -659,16 +656,29 @@
 
 <div class="sticky" role="region" aria-label="Быстрые действия">
   <a class="btn btn-primary" href="#zayavka" data-situation=""><span data-i18n="cta_main">Описать ситуацию</span></a>
-  <a class="sticky-tel" href="tel:+77003091494" aria-label="Позвонить: +7 700 309 14 94"><svg class="ic" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><use href="#ic-tel"/></svg></a>
-  <a class="sticky-wa" href="https://wa.me/77003091494" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"><svg class="ic" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><use href="#ic-wa"/></svg></a>
   <a class="sticky-ig" href="https://instagram.com/advocate.astana01" target="_blank" rel="noopener" aria-label="Instagram @advocate.astana01"><svg class="ig-i" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><use href="#ic-ig"/></svg></a>
 </div>
+
+<dialog class="offer" id="offer" aria-labelledby="offerH">
+  <button type="button" class="offer-close" aria-label="Закрыть">×</button>
+  <p class="kick"><span data-i18n="of_kick">Консультация адвоката</span></p>
+  <h2 class="offer-h" id="offerH" tabindex="-1" autofocus data-i18n="of_h">Опишите ситуацию - скажу, есть ли перспектива</h2>
+  <p class="offer-x" data-i18n="of_x">Заявка займёт минуту. Всё сказанное защищено адвокатской тайной.</p>
+  <p class="offer-q" data-i18n="fm_what">Что произошло</p>
+  <div class="offer-chips">
+    <a class="chip-a" href="#zayavka" data-situation="1" data-i18n="chip1">Задержали / вызывают на допрос</a>
+    <a class="chip-a" href="#zayavka" data-situation="2" data-i18n="chip2">Уже идёт следствие</a>
+    <a class="chip-a" href="#zayavka" data-situation="3" data-i18n="chip3">Дело в суде</a>
+    <a class="chip-a" href="#zayavka" data-situation="4" data-i18n="chip4">Банк, имущество или госорган</a>
+  </div>
+  <a class="btn btn-primary btn-lg offer-cta" href="#zayavka" data-situation=""><span data-i18n="of_btn">Заполнить заявку</span></a>
+</dialog>
 
 <dialog class="lightbox" id="lightbox"><button type="button" class="lb-close" aria-label="Закрыть">×</button><img src="data:," alt="Документ крупно"></dialog>
 
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
-<script src="script.js?v=20261124-1" defer></script>
+<script src="script.js?v=20261125-1" defer></script>
 </body>
 </html>

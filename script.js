@@ -505,6 +505,64 @@
     lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
   }
 
+  /* ---------- Предложение заявки через 15 секунд на сайте ----------
+     Время считается, только пока вкладка видна. Один раз за визит; не показывать,
+     если человек уже начал заполнять форму, отправил её или форма сейчас на экране. */
+  function initOffer() {
+    var dlg = document.getElementById('offer');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    var KEY = 'offerShown';
+    try { if (sessionStorage.getItem(KEY)) return; } catch (e) {}
+    var form = document.getElementById('leadForm');
+    var zone = document.getElementById('zayavka');
+    var engaged = false, secs = 0, timer = null;
+    if (form) {
+      form.addEventListener('focusin', function () { engaged = true; });
+      form.addEventListener('change', function () { engaged = true; });
+    }
+    function inView(el) {
+      if (!el) return false;
+      var r = el.getBoundingClientRect();
+      return r.top < window.innerHeight * 0.8 && r.bottom > window.innerHeight * 0.2;
+    }
+    function busy() {
+      var lb = document.getElementById('lightbox');
+      return document.body.classList.contains('menu-open') || (lb && lb.open) || inView(zone);
+    }
+    function close() {
+      if (lenis) lenis.start(); /* до перехода к форме: событие close приходит позже */
+      if (dlg.open) dlg.close();
+    }
+    timer = setInterval(function () {
+      if (engaged) { clearInterval(timer); return; }
+      if (document.hidden) return;
+      secs++;
+      if (secs < 15 || busy()) return;
+      clearInterval(timer);
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+      if (lenis) lenis.stop();
+      dlg.showModal();
+    }, 1000);
+    dlg.addEventListener('close', function () { if (lenis) lenis.start(); });
+    dlg.querySelector('.offer-close').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg) {
+        var r = dlg.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close();
+        return;
+      }
+      var a = e.target.closest('a[href="#zayavka"]');
+      if (!a) return;
+      close();
+      /* переход и предвыбор ситуации делает initAnchors; после прокрутки - фокус в поле имени */
+      var withSit = !!a.getAttribute('data-situation');
+      setTimeout(function () {
+        var f = form && form.querySelector(withSit ? 'input[name="name"]' : '.chip input');
+        if (f) f.focus({ preventScroll: true });
+      }, 1250);
+    });
+  }
+
   /* ---------- Шапка и меню ---------- */
   function initHeader() {
     var header = document.getElementById('header');
@@ -546,6 +604,7 @@
     initLane();
     initForm();
     initLightbox();
+    initOffer();
 
     /* клики tel / WhatsApp (контакты, подвал, экран «спасибо») -> конверсии Google Ads;
        без preventDefault: tel: не выгружает страницу, wa.me открывается в новой вкладке */

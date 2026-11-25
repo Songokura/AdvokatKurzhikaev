@@ -269,6 +269,25 @@ body.menu-open .burger span+span{transform:rotate(-45deg)}
 .lightbox{border:0;padding:0;background:transparent;max-width:min(92vw,1000px);max-height:92vh}
 .lightbox::backdrop{background:rgba(15,29,54,.78);backdrop-filter:blur(4px)}
 .lightbox img{max-width:min(92vw,1000px);max-height:92vh;width:auto;height:auto;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+/* ---------- Всплывающее предложение заявки (через 15 с) ---------- */
+.offer{width:min(560px,100% - 2*var(--gut));max-height:calc(100svh - 32px);overflow:auto;border:0;border-radius:18px;padding:36px 36px 32px;background:var(--paper);color:var(--ink);box-shadow:0 40px 90px -30px rgba(15,29,54,.6)}
+.offer::backdrop{background:rgba(15,29,54,.55)}
+.offer[open]{animation:offerIn .45s var(--ease)}
+.offer[open]::backdrop{animation:offerFade .45s var(--ease)}
+@keyframes offerIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes offerFade{from{opacity:0}to{opacity:1}}
+.offer-close{position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;font-size:26px;line-height:1;color:var(--navy);transition:background var(--fast) var(--ease)}
+.offer-close:hover{background:var(--steel)}
+.offer-h:focus{outline:none}
+.offer-h{font:700 clamp(24px,3vw,32px)/1.12 var(--disp);color:var(--navy);margin:0 0 12px;padding-right:28px}
+.offer-x{margin:0 0 22px;color:var(--ink)}
+.offer-q{margin:0 0 10px;font-weight:600;font-size:15px;color:var(--ink-2)}
+.offer-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.chip-a{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--navy);font-size:15px;line-height:1.25;transition:border-color var(--fast) var(--ease),background var(--fast) var(--ease)}
+.chip-a:hover{border-color:var(--blue);background:var(--steel)}
+.offer-cta{width:100%;white-space:normal;text-align:center}
+@media (max-width:520px){.offer{padding:28px 20px 22px;border-radius:16px}.chip-a{font-size:14px;padding:8px 14px}}
+@media (prefers-reduced-motion:reduce){.offer[open],.offer[open]::backdrop{animation:none}}
 .lb-close{position:absolute;right:8px;top:8px;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--navy);font-size:24px;line-height:1}
 
 /* FAQ */
@@ -434,7 +453,7 @@ body.menu-open .burger span+span{transform:rotate(-45deg)}
   .contacts-bg::after{background:linear-gradient(180deg,rgba(243,245,248,.95),rgba(243,245,248,.8))}
   .sec{padding:56px 0}
   .plate{padding:56px 0}
-  .sticky{display:grid;grid-template-columns:minmax(0,1fr) 52px 52px 52px;gap:6px;right:0;left:0;bottom:0;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:rgba(243,245,248,.96);border-top:1px solid var(--line)}
+  .sticky{display:grid;grid-template-columns:minmax(0,1fr) 52px;gap:6px;right:0;left:0;bottom:0;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));background:rgba(243,245,248,.96);border-top:1px solid var(--line)}
   .sticky .btn{display:inline-flex;min-height:52px;padding:0 10px;font-size:15px;min-width:0}
   .sticky .btn span{overflow:hidden;text-overflow:ellipsis}
   .sticky-tel,.sticky-wa,.sticky-ig{width:52px;height:52px;border-radius:10px;box-shadow:none}
@@ -447,7 +466,7 @@ body.menu-open .burger span+span{transform:rotate(-45deg)}
 @media (max-width:400px){
   .lang button{padding:5px 8px}
   .burger{width:40px;height:40px}
-  .sticky{grid-template-columns:minmax(0,1fr) 48px 48px 48px}
+  .sticky{grid-template-columns:minmax(0,1fr) 48px}
   .sticky .btn{padding:0 8px}
   .sticky-tel,.sticky-wa,.sticky-ig{width:48px}
 }
